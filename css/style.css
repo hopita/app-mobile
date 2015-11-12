@@ -1,0 +1,15 @@
+#home img{
+	display: block;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 320px;
+}
+
+.ui-li-has-thumb img{
+	padding:10px;
+}
+
+.sharedaddy{
+	display:none;
+}
+    

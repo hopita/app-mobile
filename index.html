@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Mobile Web Apps</title>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/jquerymobile.js"></script>
+
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="css/jquerymobile.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<!--page:home-->
+  <section data-role="page" id="home">
+   
+   <article data-role="content">
+      <img src="images/viewsourcelogo.png" alt="View Source Logo">
+
+      <div data-role="controlgroup">
+        <a href="#blog" class="ui-btn ui-icon-edit ui-btn-icon-left
+            ui-corner-all ui-btn-b">Blog</a>
+        <a href="#" class="ui-btn ui-icon-video ui-btn-icon-left
+            ui-corner-all ui-btn-b">Videos</a>
+        <a href="#" class="ui-btn ui-icon-camera ui-btn-icon-left
+            ui-corner-all ui-btn-b">Photos</a>
+        <a href="#" class="ui-btn ui-icon-comment ui-btn-icon-left
+            ui-corner-all ui-btn-b">Tweets</a>
+      </div>
+   </article><!-- content -->
+   
+  </section><!-- home -->
+ <!--page:blog-->
+  <section id="blog" class="header_default" data-role="page" data-title="Blog">
+   
+   <div data-role="content" id="postlist">
+     
+   </div><!-- content -->
+   <footer data-theme="b" data-role="footer" data-position="fixed">
+      <nav data-role="navbar">
+        <ul>
+          <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+          <li><a href="#blog" class="ui-btn ui-icon-edit ui-btn-icon-top">Blog</a></li>
+          <li><a href="#" class="ui-btn ui-icon-video ui-btn-icon-top">Videos</a></li>
+          <li><a href="#" class="ui-btn ui-icon-camera ui-btn-icon-top">Photos</a></li>
+          <li><a href="#" class="ui-btn ui-icon-comment ui-btn-icon-top">Tweets</a></li>
+        </ul>
+      </nav>      
+   </footer><!-- footer -->
+  </section><!-- blog -->
+  
+  <!--page:blogpost-->
+   <section class="header_default" data-title="Posts" data-role="page" id="blogpost"> 
+  	<div data-role="content">
+  		<div id="mypost"></div>
+  	</div>
+  </section><!-- blogpost -->
+
+<script src="js/script.js"></script>
+<script src="http://magdabandera.com/category/bitacora/?json=1&count=10&callback=listPosts"></script>
+
+</body>
+</html>
