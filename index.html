@@ -22,44 +22,70 @@
       <div data-role="controlgroup">
         <a href="#blog" class="ui-btn ui-icon-edit ui-btn-icon-left
             ui-corner-all ui-btn-b">Blog</a>
-        <a href="#" class="ui-btn ui-icon-video ui-btn-icon-left
+        <a href="#videos" class="ui-btn ui-icon-video ui-btn-icon-left
             ui-corner-all ui-btn-b">Videos</a>
-        <a href="#" class="ui-btn ui-icon-camera ui-btn-icon-left
+        <a href="#photos" class="ui-btn ui-icon-camera ui-btn-icon-left
             ui-corner-all ui-btn-b">Photos</a>
-        <a href="#" class="ui-btn ui-icon-comment ui-btn-icon-left
+        <a href="#tweets" class="ui-btn ui-icon-comment ui-btn-icon-left
             ui-corner-all ui-btn-b">Tweets</a>
       </div>
    </article><!-- content -->
    
   </section><!-- home -->
  <!--page:blog-->
-  <section id="blog" class="header_default" data-role="page" data-title="Blog">
+  <section id="blog" class="header_default footer_default" data-role="page" data-title="Blog">
    
    <div data-role="content" id="postlist">
      
    </div><!-- content -->
-   <footer data-theme="b" data-role="footer" data-position="fixed">
-      <nav data-role="navbar">
-        <ul>
-          <li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
-          <li><a href="#blog" class="ui-btn ui-icon-edit ui-btn-icon-top">Blog</a></li>
-          <li><a href="#" class="ui-btn ui-icon-video ui-btn-icon-top">Videos</a></li>
-          <li><a href="#" class="ui-btn ui-icon-camera ui-btn-icon-top">Photos</a></li>
-          <li><a href="#" class="ui-btn ui-icon-comment ui-btn-icon-top">Tweets</a></li>
-        </ul>
-      </nav>      
-   </footer><!-- footer -->
+   
   </section><!-- blog -->
   
   <!--page:blogpost-->
-   <section class="header_default" data-title="Posts" data-role="page" id="blogpost"> 
+   <section class="header_default footer_default" data-title="Posts" data-role="page" id="blogpost"> 
   	<div data-role="content">
   		<div id="mypost"></div>
   	</div>
   </section><!-- blogpost -->
+  
+  <!--page:videos-->
+  <section id="videos" class="header_default footer_default" data-role="page" data-title="Vídeos">  
+	   <div data-role="content" >
+	   	<div class="ui-grid-a" id="videoList">
+	   		
+	   	</div>   
+	   </div><!-- content --> 
+  </section><!-- videos -->
+  
+  <!--page:videoplayer-->
+   <section class="header_default footer_default" data-title="Player" data-role="page" id="videoplayer"> 
+  	<div data-role="content">
+  		<div id="myplayer"></div>
+  	</div>
+  </section><!-- videoplayer -->
 
+<!--page:photos-->
+  <section id="photos" class="header_default footer_default" data-role="page" data-title="Photo grid">  
+	   <div data-role="content" >
+			<div class="ui-grid-c" id="photolist">
+	   		
+	   	</div>  
+	   </div><!-- content --> 
+  </section><!-- videos -->
+  
+  <!--page:showphoto-->
+   <section data-role="page" id="showphoto"> 
+  	<div data-role="content">
+  		<div id="myphoto"></div>
+  	</div>
+  </section><!-- showphoto -->
+
+ 
 <script src="js/script.js"></script>
 <script src="http://magdabandera.com/category/bitacora/?json=1&count=10&callback=listPosts"></script>
-
+<script src="https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=UUzwuv9uBD__R77qsLrelnOw&key=AIzaSyAbOIvUrfE5Snvwk6HsmtZxQ41271gDk8Q
+&callback=listVideos"></script>
+<script src="http://api.flickr.com/services/feeds/photos_public.gne?id=73845487@N00&format=json&tags=viewsource"></script>
+<script src="http://iviewsource.com/exercises/powtweets/tweets_json.php?count=30&callback=listTweets"></script>
 </body>
 </html>

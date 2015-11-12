@@ -6,6 +6,23 @@ $(document).ready(function() {
         .toolbar({ position: "fixed" });
         $("[data-role='header'] h1").text($(this).jqmData("title"));
     }
+    
+    $.mobile.resetActivePageHeight();
+    
+    if ($($(this)).hasClass("footer_default")) {
+      $('<footer data-theme="b" data-role="footer" data-position="fixed"><nav data-role="navbar"><ul><li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li><li><a href="#blog" class="ui-btn ui-icon-edit ui-btn-icon-top">Blog</a></li><li><a href="#videos" class="ui-btn ui-icon-video ui-btn-icon-top">Videos</a></li><li><a href="#photos" class="ui-btn ui-icon-camera ui-btn-icon-top">Photos</a></li><li><a href="#tweets" class="ui-btn ui-icon-comment ui-btn-icon-top">Tweets</a></li></ul></nav></footer>')
+        .prependTo( $(this) )
+        .toolbar({ position: "fixed" });
+    }
+    
+    var current = $('.ui-page-active').attr('id');
+    $("[data-role='footer'] a.ui-btn-active").removeClass('ui-btn-active');
+    $("[data-role='footer'] a").each(function(){
+    	if ($(this).attr('href') === '#' + current){
+    		$(this).addClass('ui-btn-active');
+    	}
+    });
+    
   });   
 });
 
@@ -38,4 +55,60 @@ function showPost(id){
 		output += data.post.content ;
 		$('#mypost').html(output);
 	});
+}
+
+function listVideos(data){
+	var output = '';
+	for (var i=0; i<data.items.length;i++){
+		var title=data.items[i].snippet.title.replace(/"/gi, '');
+		var thumbnail=data.items[i].snippet.thumbnails.high.url;
+		var description=data.items[i].snippet.description.replace('"', '');
+		var videoId=data.items[i].snippet.resourceId.videoId;
+		
+		var blocktype = ((i % 2)===1) ? 'b' : 'a';
+		output += '<div class="ui-block-' + blocktype +'">';
+		output += '<h3 class="movietitle">' + title + '</h3>';
+		output += '<a href="#videoplayer" data-transition="fade"  onclick="playVideo(\'' + videoId + '\',\'' + title + '\',\'' + escape(description) + '\');">';
+		output += '<img src="' + thumbnail +'">';
+		output += '<a   >';
+		output += '</div>';
+		$('#videoList').html(output);
+		
+	}
+}
+
+function playVideo(id,title,description){
+	var output ='<iframe width="640" height="480" src="http://www.youtube.com/embed/' + id + '?wmode=transparent&amp;HD=0&amp;rel=0&amp;showinfo=0;controls=1&amp;autoplay=1" frameborder="0" allowfullscreen></iframe>';
+	output += '<h3>' + title + '</h3>';
+	output += '<p>' + unescape(description) + '</p>';
+	$('#myplayer').html(output);
+}
+
+function jsonFlickrFeed(data){
+	var output ='';
+	for (var i=0; i<data.items.length;i++){
+		var title=data.items[i].title.replace(/"/gi, '');
+		var link=data.items[i].media.m.substring(0,56);
+		var blocktype = ((i % 4)===3) ? 'd' : 
+						((i % 4)===2) ? 'c' : 
+						((i % 4)===1) ? 'b' : 'a';
+		output += '<div class="ui-block-' + blocktype +'">';
+		output += '<a href="#showphoto" data-transition="fade" onclick="showPhoto(\'' + link + '\',\'' + title + '\')">';
+		output += '<img src="' + link + '_q.jpg" alt="' + title +' ">';
+		output += '</a>';
+		output += '</div>';
+	}
+	
+	$('#photolist').html(output);
+}
+
+function showPhoto(link, title){
+	var output = '<a href="#photos" data-transition="fade">';
+	output += '<img src="' + link + '_b.jpg" alt="' + title +' ">';
+	output += '</a>';
+	$('#myphoto').html(output);
+}
+
+function listTweets(data){
+	console.log(data);
 }
