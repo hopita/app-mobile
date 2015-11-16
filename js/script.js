@@ -10,7 +10,7 @@ $(document).ready(function() {
     $.mobile.resetActivePageHeight();
     
     if ($($(this)).hasClass("footer_default")) {
-      $('<footer data-theme="b" data-role="footer" data-position="fixed"><nav data-role="navbar"><ul><li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li><li><a href="#blog" class="ui-btn ui-icon-edit ui-btn-icon-top">Blog</a></li><li><a href="#videos" class="ui-btn ui-icon-video ui-btn-icon-top">Videos</a></li><li><a href="#photos" class="ui-btn ui-icon-camera ui-btn-icon-top">Photos</a></li><li><a href="#tweets" class="ui-btn ui-icon-comment ui-btn-icon-top">Tweets</a></li></ul></nav></footer>')
+      $('<footer data-theme="b" data-role="footer" data-position="fixed"><nav data-role="navbar"><ul><li><a href="#home" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li><li><a href="#blog" class="ui-btn ui-icon-edit ui-btn-icon-top">Blog</a></li><li><a href="#videos" class="ui-btn ui-icon-video ui-btn-icon-top">Videos</a></li><li><a href="#photos" class="ui-btn ui-icon-camera ui-btn-icon-top">Photos</a></li></ul></nav></footer>')
         .prependTo( $(this) )
         .toolbar({ position: "fixed" });
     }
@@ -110,5 +110,38 @@ function showPhoto(link, title){
 }
 
 function listTweets(data){
-	console.log(data);
+	var output = '<ul data-role="listview">';
+  $.each(data, function(key, val) {
+    var text = data[key].text;
+    var thumbnail = data[key].user.profile_image_url;
+    thumbnail = thumbnail.substring(0, thumbnail.length - 12) + '_bigger.jpeg';
+    var name = data[key].user.name;
+
+    //Parse URLs in twitter text
+    text = text.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(i) {
+      var url=i.link(i);
+      return url;
+    });
+
+    //Parse @mentions in twitter text
+    text = text.replace(/[@]+[A-Za-z0-9-_]+/g, function(i) {
+      var item = i.replace("@",'');
+      var url=i.link("http://twitter.com/" + item);
+      return url;
+    });
+
+    //Parse #hashtags in twitter text
+    text = text.replace(/[#]+[A-Za-z0-9-_]+/g, function(i) {
+      var item = i.replace("#",'%23');
+      var url=i.link("http://twitter.com/search?q=" + item);
+      return url;
+    });
+
+    output += '<li>';
+    output += '<img src="' + thumbnail + '" alt="Photo of ' + name + '">';
+    output += '<div>' + text + '</div>';
+    output += '</li>';
+  }); //Go through each data
+  output += '</ul>';
+  $('#tweetlist').html(output);
 }
